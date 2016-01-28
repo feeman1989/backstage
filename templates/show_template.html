@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <meta charset="utf8"/>
+        <link href="../../assets/dataTables/jquery.dataTables.css" type="text/css" rel="stylesheet"/>
+        <script src="../../assets/dataTables/jquery.dataTables.min.js"></script>
+
+    </head>
+    <body>
+        <div class="info_nav">
+<a href="#">首页</a> >> 后台信息
+
+        </div>
+        <div class="info_box">
+            <div class="info_title">
+            <span>
+                <strong>
+后台信息
+                </strong>
+            </span>
+            </div>
+            <div class="show_info_seach">
+                <select id="select_column">
+<option value="1">机器id</option>
+<option value="2">机组id</option>
+<option value="3">游戏名</option>
+<option value="4">游戏监控信息</option>
+<option value="5">地区(中)</option>
+<option value="6">地区(英)</option>
+<option value="7">备注</option>
+                </select>
+                <input type="text" id="column3_search" placeholder="关键字搜索" />
+<button id="del_info">批量删除</button>
+<button><a href="create_game_center">添加信息</a></button>
+            </div>
+
+            <div class="show_info_centent">
+                <table id="example" class="display" cellspacing="0" width="100%">
+                    <thead>
+<tr>
+    <th><input type="checkbox" name="checkboxParent"/></th>
+    <th>机器id</th>
+    <th>机组id</th>
+    <th>游戏名</th>
+    <th>游戏监控信息</th>
+    <th>地区(中)</th>
+    <th>地区(英)</th>
+    <th>备注</th>
+</tr>
+                    </thead>
+                    <tbody>
+<tr>
+    <td><input type="checkbox" name="checkboxParent"/></td>
+    <td>xxx</td>
+    <td>aaa</td>
+    <td>bbb</td>
+    <td>ccc</td>
+    <td>ddd</td>
+    <td>eee</td>
+    <td>eee</td>
+</tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        function filterColumn(i){
+            str=$("#column3_search").val()
+            $('#example').DataTable().column(i).search(
+                str
+            ).draw();
+        }
+        $(document).ready(function(){
+            //highcharts默认时区为国际时间区
+            //Highcharts.setOptions({ global: { useUTC: false } });
+            $("#example").dataTable({
+                "bLengthChange":false,
+                "aaSorting":[[1,"asc"]],
+                "columnDefs":[{"orderable":false,"targets":0}],
+                "iDisplayLength":20,
+                "language":{
+                "lengthMenu":"每页 _MENU_ 条记录",
+                "zeroRecords":"没有找到记录",
+                "info":"第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+                "infoEmpty":"无记录",
+                "infoFiltered":"(从 _MAX_ 条记录过滤)",
+                "oPaginate":{
+                    "sFirst":"首页",
+                    "sPrevious":"前一页",
+                    "sNext":"后一页",
+                    "sLast":"尾页"
+                    }
+                }
+            })
+            $("#column3_search").on('keyup',function(){
+                column_num=$("#select_column").val()
+                filterColumn(column_num);
+            })
+        })
+    </script>
+</html>
+
