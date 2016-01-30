@@ -34,3 +34,6 @@ def machine_info(request):
     if request.method == "GET":
         machine_infos = Machine_Info.objects.order_by('-id')
         return render_to_response("tables.html",{'machine_infos':machine_infos})
+
+def open_server_time(request):
+    return render_to_response("open_server_time.html")

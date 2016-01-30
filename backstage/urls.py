@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from app.views import login,account_auth,machine_info,logout,index
+from app.views import login,account_auth,machine_info,logout,index,open_server_time
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^index/$', index),
     url(r'^machine_info/$', machine_info),
     url(r'^logout/$', logout),
+    url(r'^open_server_time/$', open_server_time),
 
 
 ]
