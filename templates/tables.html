@@ -19,12 +19,8 @@
                         {% endblock %}
                     </select>
                     <input type="text" id="column3_search" placeholder="关键字搜索" />
-					<button>提交</button>
                 </div>
-
-
                 <!-- <div class="table-responsive"> -->
-
                 <!-- <div class="dataTables_borderWrap"> -->
                 <div>
                     <table id="sample-table-2" class="table table-striped table-bordered table-hover">
@@ -106,7 +102,6 @@
                         }
                     }
                 });
-
             function filterColumn(i) {
                 str = $("#column3_search").val()
                 $('#sample-table-2').DataTable().column(i).search(
