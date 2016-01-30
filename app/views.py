@@ -32,10 +32,5 @@ def logout(request):
     return HttpResponseRedirect("/login/")
 def machine_info(request):
     if request.method == "GET":
-        machine_info = Machine_Info.objects.all()
-        machine_info_list = []
-        for i in machine_info:
-            machine_info_list.append((i.name,i.zone,i.tenworldid,i.localip,i.interip))
-        print machine_info_list
-
-        return render_to_response("tables.html",{'machine_info':machine_info_list})
+        machine_infos = Machine_Info.objects.order_by('-id')
+        return render_to_response("tables.html",{'machine_infos':machine_infos})
