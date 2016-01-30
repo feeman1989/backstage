@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% block body %}
+<title>{% block title %}test{% endblock %}</title>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 class="header smaller lighter blue">{% block title_div %}test{% endblock %}</h3>
+                <div class="table-header">
+                    .......
+                </div>
+
+                <div class="show_info_seach">
+                    <select id="select_column">
+                        {% block option %}
+						   <option>test</option>
+                        {% endblock %}
+                    </select>
+                    <input type="text" id="column3_search" placeholder="关键字搜索" />
+                    </button>
+                </div>
+
+
+                <!-- <div class="table-responsive"> -->
+
+                <!-- <div class="dataTables_borderWrap"> -->
+                <div>
+                    <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+                        <thead>
+                           {% block th %}{% endblock %}
+                        </thead>
+
+                        <tbody>
+                           {% block td %}{% endblock %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE CONTENT ENDS -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<!-- page specific plugin scripts -->
+<script type="text/javascript">
+  $(function(){
+    /**
+    *表格数据
+    */
+    var editId;        //定义全局操作数据变量
+	var isEdit;
+    $('#sample-table-2').bootstrapTable({
+          method: 'post',
+          url: 'api/get_machine_info',
+          contentType: "application/json",
+          datatype: "json",
+          cache: false,
+          checkboxHeader: true,
+          striped: true,
+          pagination: true,
+          pageSize: 15,
+          pageList: [10,20,50],
+          search: true,
+          showColumns: true,
+          showRefresh: true,
+          minimumCountColumns: 2,
+          clickToSelect: true,
+          smartDisplay: true,
+          //sidePagination : "server",
+          sortOrder: 'asc',
+          sortName: 'id',
+          columns: [{
+              field: 'bianhao',
+              title: 'checkbox',      
+              checkbox: true,
+          },{
+              field: 'id',
+              title: '编号',
+              align: 'center',
+              valign: 'middle',
+              width:25,
+              sortable: false,
+          },{
+
+              field: 'hostname',
+              title: '主机名',
+              align: 'center',
+              valign: 'middle',
+              sortable: false
+          },{
+              field: 'ip',
+              title: 'IP地址',
+              align: 'center',
+              valign: 'middle',
+              sortable: false
+          },{
+              field: 'cpu',
+              title: 'CPU',
+              align: 'center',
+              valign: 'middle',
+              sortable: false
+          },{
+              field: 'mem',
+              title: 'MEM',
+              align: 'center',
+              valign: 'middle',
+              sortable: false
+          },{
+              field: 'disk',
+              title: 'DISK',
+              align: 'center',
+              valign: 'middle',
+              sortable: false
+          },{
+              field: 'project',
+              title: '项目',
+              align: 'center',
+			  valign: 'middle',
+              sortable: false
+          },{
+              field: 'mark',
+              title: '机房',
+              align: 'center',
+              valign: 'middle',
+              sortable: false
+          }]
+      });
+</script>
+{% endblock %}

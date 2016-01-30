@@ -11,7 +11,6 @@
                     <i class="widget-icon fa fa-tags themesecondary"></i>
 					
                     <span class="widget-caption themesecondary">硬件资产</span>
- 
                     
                 </div><!--Widget Header-->
                 <div style="padding:-10px 0px;" class="widget-body no-padding">
@@ -95,7 +94,7 @@ $(function(){
 	var isEdit;
     $('#myLoadTable').bootstrapTable({
           method: 'post',
-          url: '/api/gethasset',
+          url: 'api/get_machine_info',
           contentType: "application/json",
           datatype: "json",
           cache: false,
