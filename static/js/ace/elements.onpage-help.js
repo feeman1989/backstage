@@ -329,13 +329,17 @@ window.Onpage_Help = function(options) {
 		
 		var body = mbody[0];
 		var disableScroll = body.scrollHeight <= body.clientHeight;
+		
+		//mousewheel library available?
+		var mousewheel_event = !!$.event.special.mousewheel ? 'mousewheel.ace.help' : 'mousewheel.ace.help DOMMouseScroll.ace.help';
 
 		mbody.parent()
-		.off('mousewheel.help DOMMouseScroll.help')
-		.on('mousewheel.help DOMMouseScroll.help', function(event) {
+		.off(mousewheel_event)
+		.on(mousewheel_event, function(event) {
 			if(disableScroll) event.preventDefault();
 			else {
-				var delta = event.originalEvent.detail < 0 || event.originalEvent.wheelDelta > 0 ? 1 : -1
+				event.deltaY = event.deltaY || 0;
+				var delta = (event.deltaY > 0 || event.originalEvent.detail < 0 || event.originalEvent.wheelDelta > 0) ? 1 : -1
 
 				if(delta == -1 && body.scrollTop + body.clientHeight >= body.scrollHeight) event.preventDefault();
 				else if(delta == 1 && body.scrollTop <= 0) event.preventDefault();

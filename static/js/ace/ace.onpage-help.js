@@ -1,9 +1,8 @@
 jQuery(function($) {
 	var help = null;//Onpage_Help instance
 
-	
 	//for ace demo pages, we temporarily disable fixed navbar, etc ... when help is enabled
-	//because when an element is fixed, its highlighted help section should also become fixed?!
+	//because when an element is fixed, its highlighted help section should also become fixed!
 	var page_settings = {}
 	var before_enable_help = function() {
 		$('#btn-scroll-up').css('z-index', 1000000);//bring btn-scroll-up  higher , to be over our help area
@@ -13,15 +12,15 @@ jQuery(function($) {
 		page_settings['sidebar'] = ace.settings.is('sidebar', 'fixed')
 		page_settings['breadcrumbs'] = ace.settings.is('breadcrumbs', 'fixed')
 		
-		ace.settings.navbar_fixed(false , false);//now disable fixed navbar, which automatically disabled fixed sidebar and breadcrumbs
+		ace.settings.navbar_fixed(null, false , false);//now disable fixed navbar, which automatically disabled fixed sidebar and breadcrumbs
 	}
 	var after_disable_help = function() {
 		$('#btn-scroll-up').css('z-index', '');
 
 		//restore fixed state of navbar, sidebar, etc
-		if( page_settings['breadcrumbs'] ) ace.settings.breadcrumbs_fixed(true, false, false);
-		if( page_settings['sidebar'] ) ace.settings.sidebar_fixed(true, false, false);
-		if( page_settings['navbar'] ) ace.settings.navbar_fixed(true, false, false);
+		if( page_settings['breadcrumbs'] ) ace.settings.breadcrumbs_fixed(null, true, false);
+		if( page_settings['sidebar'] ) ace.settings.sidebar_fixed(null, true, false);
+		if( page_settings['navbar'] ) ace.settings.navbar_fixed(null, true, false);
 	}
 	
 	var get_file_url = function(url, language) {

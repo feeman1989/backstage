@@ -10,21 +10,21 @@
 		var width = parseInt(Math.max((max * 20 + 40) , 90))
 
 		var $element = $(element);
-		$element.addClass('spinner-input form-control').wrap('<div class="ace-spinner">')
+		$element.addClass('spinbox-input form-control').wrap('<div class="ace-spinner middle">')
 
-		var $parent_div = $element.closest('.ace-spinner').spinner(options).wrapInner("<div class='input-group'></div>")
-		var $spinner = $parent_div.data('spinner');
+		var $parent_div = $element.closest('.ace-spinner').spinbox(options).wrapInner("<div class='input-group'></div>")
+		var $spinner = $parent_div.data('fu.spinbox');
 		
 		if(options.on_sides)
 		{
 			$element
-			.before('<div class="spinner-buttons input-group-btn">\
-					<button type="button" class="btn spinner-down btn-xs '+options.btn_down_class+'">\
+			.before('<div class="spinbox-buttons input-group-btn">\
+					<button type="button" class="btn spinbox-down btn-xs '+options.btn_down_class+'">\
 						<i class="'+ ace.vars['icon'] + options.icon_down+'"></i>\
 					</button>\
 				</div>')
-			.after('<div class="spinner-buttons input-group-btn">\
-					<button type="button" class="btn spinner-up btn-xs '+options.btn_up_class+'">\
+			.after('<div class="spinbox-buttons input-group-btn">\
+					<button type="button" class="btn spinbox-up btn-xs '+options.btn_up_class+'">\
 						<i class="'+ ace.vars['icon'] + options.icon_up+'"></i>\
 					</button>\
 				</div>');
@@ -34,11 +34,11 @@
 		}
 		else {
 			 $element
-			 .after('<div class="spinner-buttons input-group-btn">\
-					<button type="button" class="btn spinner-up btn-xs '+options.btn_up_class+'">\
+			 .after('<div class="spinbox-buttons input-group-btn">\
+					<button type="button" class="btn spinbox-up btn-xs '+options.btn_up_class+'">\
 						<i class="'+ ace.vars['icon'] + options.icon_up+'"></i>\
 					</button>\
-					<button type="button" class="btn spinner-down btn-xs '+options.btn_down_class+'">\
+					<button type="button" class="btn spinbox-down btn-xs '+options.btn_down_class+'">\
 						<i class="'+ ace.vars['icon'] + options.icon_down+'"></i>\
 					</button>\
 				</div>')
@@ -52,13 +52,6 @@
 				$parent_div.css('width' , width+'px')
 			}
 		}
-
-		$element.on('mousewheel.spinner DOMMouseScroll.spinner', function(event){
-			var delta = event.originalEvent.detail < 0 || event.originalEvent.wheelDelta > 0 ? 1 : -1
-			$spinner.step(delta > 0);
-			$spinner.triggerChangedEvent();
-			return false
-		})
 
 		$parent_div.on('changed', function(){
 			$element.trigger('change')//trigger the input's change event

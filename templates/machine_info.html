@@ -1,6 +1,6 @@
-<meta charset="utf8" />
+{% extends "base.html" %}
 <title>{% block title %}{% endblock %}</title>
-
+{% block body %}
 <div class="row">
     <div class="col-xs-12">
         <div class="row">
@@ -54,6 +54,7 @@
 							<td class="center">{{host.tenworldid}}</td>
 							<td class="center">{{host.localip}}</td>
 							<td class="center">{{host.interip}}</td>
+							<td></td>
 						   </tr>
 						 {% endfor %}
                         </tbody>
@@ -143,3 +144,4 @@
         })
     });
 </script>
+{% endblock %}

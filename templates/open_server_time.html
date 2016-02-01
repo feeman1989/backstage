@@ -1,23 +1,25 @@
-
+{% extends "base.html" %}
 <title>Form Elements - Ace Admin</title>
-
- 
-
+{% block body %}
 <!-- ajax layout which only needs content area -->
-<div class="page-header">
-	<h1>
-		Form Elements
-		<small>
-			<i class="ace-icon fa fa-angle-double-right"></i>
-			Common form elements and layouts
-		</small>
-	</h1>
-</div><!-- /.page-header -->
-
 <div class="row">
 	<div class="col-xs-12">
 		<!-- PAGE CONTENT BEGINS -->
 		<form class="form-horizontal" role="form">
+		    <div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="food">选择服务器：</label>
+					<div class="col-xs-12 col-sm-9">
+					<!-- #section:plugins/input.multiselect -->
+						<select id="food" class="multiselect" multiple="">
+							<option value="cheese">Cheese</option>
+							<option value="tomatoes">Tomatoes</option>
+							<option value="mozarella">Mozzarella</option>
+							<option value="mushrooms">Mushrooms</option>
+							<option value="pepperoni">Pepperoni</option>
+						</select>
+				    <!-- /section:plugins/input.multiselect -->
+					</div>
+		    </div>
 			<!-- #section:elements.form -->
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 开服时间：</label>
@@ -43,6 +45,7 @@
 					</button>
 				</div>
 			</div>
+		</form>
 		<!-- PAGE CONTENT ENDS -->
 	</div><!-- /.col -->
 </div><!-- /.row -->
@@ -50,10 +53,10 @@
 <!-- page specific plugin scripts -->
 
 <!--[if lte IE 8]>
-  <script src="../../assets/js/excanvas.min.js"></script>
+  <script src="../../static/js/excanvas.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
-	var scripts = [null,"../../assets/js/jquery-ui.custom.min.js","../../assets/js/jquery.ui.touch-punch.min.js","../../assets/js/chosen.jquery.min.js","../../assets/js/fuelux/fuelux.spinner.min.js","../../assets/js/date-time/bootstrap-datepicker.min.js","../../assets/js/date-time/bootstrap-timepicker.min.js","../../assets/js/date-time/moment.min.js","../../assets/js/date-time/daterangepicker.min.js","../../assets/js/date-time/bootstrap-datetimepicker.min.js","../../assets/js/bootstrap-colorpicker.min.js","../../assets/js/jquery.knob.min.js","../../assets/js/jquery.autosize.min.js","../../assets/js/jquery.inputlimiter.1.3.1.min.js","../../assets/js/jquery.maskedinput.min.js","../../assets/js/bootstrap-tag.min.js","../../assets/js/typeahead.jquery.min.js", null]
+	var scripts = [null,"../../static/js/jquery-ui.custom.min.js","../../static/js/jquery.ui.touch-punch.min.js","../../static/js/chosen.jquery.min.js","../../static/js/fuelux/fuelux.spinner.min.js","../../static/js/date-time/bootstrap-datepicker.min.js","../../static/js/date-time/bootstrap-timepicker.min.js","../../static/js/date-time/moment.min.js","../../static/js/date-time/daterangepicker.min.js","../../static/js/date-time/bootstrap-datetimepicker.min.js","../../static/js/bootstrap-colorpicker.min.js","../../static/js/jquery.knob.min.js","../../static/js/jquery.autosize.min.js","../../static/js/jquery.inputlimiter.1.3.1.min.js","../../static/js/jquery.maskedinput.min.js","../../static/js/bootstrap-tag.min.js","../../static/js/typeahead.jquery.min.js", null]
 	ace.load_ajax_scripts(scripts, function() {
 	  //inline scripts related to this page
 		 jQuery(function($) {
@@ -457,5 +460,149 @@
 		*/
 	
 	});
+	 var demo1 = $('select[name="duallistbox_demo1[]"]').bootstrapDualListbox({infoTextFiltered: '<span class="label label-purple label-lg">Filtered</span>'});
+				var container1 = demo1.bootstrapDualListbox('getContainer');
+				container1.find('.btn').addClass('btn-white btn-info btn-bold');
+			
+				/**var setRatingColors = function() {
+					$(this).find('.star-on-png,.star-half-png').addClass('orange2').removeClass('grey');
+					$(this).find('.star-off-png').removeClass('orange2').addClass('grey');
+				}*/
+				$('.rating').raty({
+					'cancel' : true,
+					'half': true,
+					'starType' : 'i'
+					/**,
+					
+					'click': function() {
+						setRatingColors.call(this);
+					},
+					'mouseover': function() {
+						setRatingColors.call(this);
+					},
+					'mouseout': function() {
+						setRatingColors.call(this);
+					}*/
+				})//.find('i:not(.star-raty)').addClass('grey');
+				
+				
+				
+				//////////////////
+				//select2
+				$('.select2').css('width','200px').select2({allowClear:true})
+				$('#select2-multiple-style .btn').on('click', function(e){
+					var target = $(this).find('input[type=radio]');
+					var which = parseInt(target.val());
+					if(which == 2) $('.select2').addClass('tag-input-style');
+					 else $('.select2').removeClass('tag-input-style');
+				});
+				
+				//////////////////
+				$('.multiselect').multiselect({
+				 enableFiltering: true,
+				 buttonClass: 'btn btn-white btn-primary',
+				 templates: {
+					button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown"></button>',
+					ul: '<ul class="multiselect-container dropdown-menu"></ul>',
+					filter: '<li class="multiselect-item filter"><div class="input-group"><span class="input-group-addon"><i class="fa fa-search"></i></span><input class="form-control multiselect-search" type="text"></div></li>',
+					filterClearBtn: '<span class="input-group-btn"><button class="btn btn-default btn-white btn-grey multiselect-clear-filter" type="button"><i class="fa fa-times-circle red2"></i></button></span>',
+					li: '<li><a href="javascript:void(0);"><label></label></a></li>',
+					divider: '<li class="multiselect-item divider"></li>',
+					liGroup: '<li class="multiselect-item group"><label class="multiselect-group"></label></li>'
+				 }
+				});
+				
+				
+				///////////////////
+					
+				//typeahead.js
+				//example taken from plugin's page at: https://twitter.github.io/typeahead.js/examples/
+				var substringMatcher = function(strs) {
+					return function findMatches(q, cb) {
+						var matches, substringRegex;
+					 
+						// an array that will be populated with substring matches
+						matches = [];
+					 
+						// regex used to determine if a string contains the substring `q`
+						substrRegex = new RegExp(q, 'i');
+					 
+						// iterate through the pool of strings and for any string that
+						// contains the substring `q`, add it to the `matches` array
+						$.each(strs, function(i, str) {
+							if (substrRegex.test(str)) {
+								// the typeahead jQuery plugin expects suggestions to a
+								// JavaScript object, refer to typeahead docs for more info
+								matches.push({ value: str });
+							}
+						});
+			
+						cb(matches);
+					}
+				 }
+			
+				 $('input.typeahead').typeahead({
+					hint: true,
+					highlight: true,
+					minLength: 1
+				 }, {
+					name: 'states',
+					displayKey: 'value',
+					source: substringMatcher(ace.vars['US_STATES'])
+				 });
+					
+					
+				///////////////
+				
+				
+				//in ajax mode, remove remaining elements before leaving page
+				$(document).one('ajaxloadstart.page', function(e) {
+					$('[class*=select2]').remove();
+					$('select[name="duallistbox_demo1[]"]').bootstrapDualListbox('destroy');
+					$('.rating').raty('destroy');
+					$('.multiselect').multiselect('destroy');
+				});
+			
 	});
 </script>
+
+        <link rel="stylesheet" href="../../static/css/ace.onpage-help.css" />
+		<link rel="stylesheet" href="../../static/js/themes/sunburst.css" />
+
+		<script type="text/javascript"> ace.vars['base'] = '..'; </script>
+		<script src="../../static/js/jquery.bootstrap-duallistbox.js"></script>
+		<script src="../../static/js/jquery.raty.js"></script>
+		<script src="../../static/js/bootstrap-multiselect.js"></script>
+		<script src="../../static/js/select2.js"></script>
+		<script src="../../static/js/typeahead.jquery.js"></script>
+		<script src="../../static/js/ace/elements.onpage-help.js"></script>
+		<script src="../../static/js/ace/ace.onpage-help.js"></script>
+		<script src="../../static/js/rainbow.js"></script>
+		<script src="../../static/js/language/generic.js"></script>
+		<script src="../../static/js/language/html.js"></script>
+		<script src="../../static/js/language/css.js"></script>
+		<script src="../../static/js/language/javascript.js"></script>
+		
+			<!-- ace scripts -->
+		<script src="../../static/js/ace/elements.scroller.js"></script>
+		<script src="../../static/js/ace/elements.colorpicker.js"></script>
+		<script src="../../static/js/ace/elements.fileinput.js"></script>
+		<script src="../../static/js/ace/elements.typeahead.js"></script>
+		<script src="../../static/js/ace/elements.wysiwyg.js"></script>
+		<script src="../../static/js/ace/elements.spinner.js"></script>
+		<script src="../../static/js/ace/elements.treeview.js"></script>
+		<script src="../../static/js/ace/elements.wizard.js"></script>
+		<script src="../../static/js/ace/elements.aside.js"></script>
+		<script src="../../static/js/ace/ace.js"></script>
+		<script src="../../static/js/ace/ace.ajax-content.js"></script>
+		<script src="../../static/js/ace/ace.touch-drag.js"></script>
+		<script src="../../static/js/ace/ace.sidebar.js"></script>
+		<script src="../../static/js/ace/ace.sidebar-scroll-1.js"></script>
+		<script src="../../static/js/ace/ace.submenu-hover.js"></script>
+		<script src="../../static/js/ace/ace.widget-box.js"></script>
+		<script src="../../static/js/ace/ace.settings.js"></script>
+		<script src="../../static/js/ace/ace.settings-rtl.js"></script>
+		<script src="../../static/js/ace/ace.settings-skin.js"></script>
+		<script src="../../static/js/ace/ace.widget-on-reload.js"></script>
+		<script src="../../static/js/ace/ace.searchbox-autocomplete.js"></script>
+{% endblock %}
