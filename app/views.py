@@ -36,13 +36,19 @@ def machine_info(request):
         machine_infos = Machine_Info.objects.order_by('-id')
         return render_to_response("machine_info.html",{'machine_infos':machine_infos})
 @login_required
-def open_server_time(request):
+def alter_open_server_time(request):
     if request.method == "GET":
         server_infos = Machine_Info.objects.order_by('-id')
-        return render_to_response("open_server_time.html",{'server_infos':server_infos})
+        return render_to_response("alter_open_server_time.html",{'server_infos':server_infos})
 
 @login_required
 def exec_sys_command(request):
     if request.method == "GET":
         server_infos = Machine_Info.objects.order_by('-id')
         return render_to_response("exec_sys_command.html",{'server_infos':server_infos})
+
+@login_required
+def open_server(request):
+    if request.method == "GET":
+        server_infos = Machine_Info.objects.order_by('-id')
+        return render_to_response("open_server.html",{'server_infos':server_infos})
