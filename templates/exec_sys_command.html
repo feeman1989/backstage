@@ -5,14 +5,14 @@
 <div class="row">
 	<div class="col-xs-12">
 		<!-- PAGE CONTENT BEGINS -->
-		<form class="form-horizontal" role="form" action="test.py">
+		<form class="form-horizontal" role="form" method="post" action="/exec_sys_command/">
 		    <div class="form-group">
 				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="food">选择服务器：</label>
 					<div class="col-xs-12 col-sm-9">
 					<!-- #section:plugins/input.multiselect -->
 						<select id="food" class="multiselect" multiple="">
 						{% for host in server_infos %}
-							<option value="{{host.zone}} {{host.interip}}">{{host.zone}} {{host.interip}}</option>
+							<option name="ip_add" value="{{host.zone}} {{host.interip}}">{{host.zone}} {{host.interip}}</option>
 						{% endfor %}
 						</select>
 					
@@ -23,7 +23,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right" for="form-field-6">命令：</label>
 					<div class="col-sm-9">
-						<input data-rel="tooltip" type="text" id="form-field-6" placeholder="系统命令" title="例如:df -h" data-placement="bottom" />
+						<input data-rel="tooltip" type="text" name="sys_command" id="form-field-6" placeholder="系统命令" title="例如:df -h" data-placement="bottom" />
 							<span class="help-button" data-rel="popover" data-trigger="hover" data-placement="left" data-content="More details." title="Popover on hover">?</span>
 					</div>
 			</div>
@@ -457,6 +457,7 @@
 				$('.multiselect').multiselect({
 				 enableFiltering: true,
 				 buttonClass: 'btn btn-white btn-primary',
+		 
 				 templates: {
 					button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown"></button>',
 					ul: '<ul class="multiselect-container dropdown-menu"></ul>',
@@ -466,6 +467,7 @@
 					divider: '<li class="multiselect-item divider"></li>',
 					liGroup: '<li class="multiselect-item group"><label class="multiselect-group"></label></li>'
 				 }
+				  
 				});
 				
 				

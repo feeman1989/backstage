@@ -46,6 +46,12 @@ def exec_sys_command(request):
     if request.method == "GET":
         server_infos = Machine_Info.objects.order_by('-id')
         return render_to_response("exec_sys_command.html",{'server_infos':server_infos})
+    elif request.method == "POST":
+        print request.POST
+        sys_command = request.POST.get('sys_command')
+        ip_add = request.POST.get('food')
+        print ip_add
+        return HttpResponseRedirect("/index/")
 
 @login_required
 def open_server(request):
