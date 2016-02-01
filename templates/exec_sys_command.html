@@ -11,12 +11,11 @@
 					<div class="col-xs-12 col-sm-9">
 					<!-- #section:plugins/input.multiselect -->
 						<select id="food" class="multiselect" multiple="">
-							<option value="cheese">Cheese</option>
-							<option value="tomatoes">Tomatoes</option>
-							<option value="mozarella">Mozzarella</option>
-							<option value="mushrooms">Mushrooms</option>
-							<option value="pepperoni">Pepperoni</option>
+						{% for host in server_infos %}
+							<option value="{{host.zone}} {{host.interip}}">{{host.zone}} {{host.interip}}</option>
+						{% endfor %}
 						</select>
+					
 				    <!-- /section:plugins/input.multiselect -->
 					</div>
 		    </div>
