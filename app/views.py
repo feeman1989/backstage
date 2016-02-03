@@ -4,7 +4,7 @@ from models import Machine_Info
 from django.contrib.auth.decorators import login_required
 from django.template.loader import get_template
 from django.template import Context
-from app.untils.exec_command import exe
+
 import json
 # Create your views here.
 def login(request):
@@ -50,7 +50,6 @@ def exec_sys_command(request):
     elif request.method == "POST":
         sys_command = request.POST.get('sys_command')
         ip_add = request.POST.getlist('servers')
-        print ip_add
         return HttpResponseRedirect("/index/")
 
 @login_required
