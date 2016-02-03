@@ -10,13 +10,11 @@
 				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="food">选择服务器：</label>
 					<div class="col-xs-12 col-sm-9">
 					<!-- #section:plugins/input.multiselect -->
-						<select id="food" class="multiselect" multiple="">
+						<select id="food" class="multiselect" multiple="multiple" name="servers">
 						{% for host in server_infos %}
-							<option name="ip_add" value="{{host.zone}} {{host.interip}}">{{host.zone}} {{host.interip}}</option>
+							<option  value="{{host.zone}} {{host.interip}}">{{host.zone}} {{host.interip}}</option>
 						{% endfor %}
 						</select>
-					
-				    <!-- /section:plugins/input.multiselect -->
 					</div>
 		    </div>
 			<!-- #section:elements.form -->
@@ -29,11 +27,9 @@
 			</div>
 			<!-- /section:elements.form -->
 			<div class="space-4"></div>
-
-	 
 			<div class="clearfix form-actions">
 				<div class="col-md-offset-3 col-md-9">
-					<button class="btn btn-info" type="submit">
+					<button id="submit1" class="btn btn-info" type="submit">
 						<i class="ace-icon fa fa-check bigger-110"></i>
 						执行
 					</button>
@@ -50,6 +46,7 @@
   <script src="../../static/js/excanvas.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
+
 	var scripts = [null,"../../static/js/jquery-ui.custom.min.js","../../static/js/jquery.ui.touch-punch.min.js","../../static/js/chosen.jquery.min.js","../../static/js/fuelux/fuelux.spinner.min.js","../../static/js/date-time/bootstrap-datepicker.min.js","../../static/js/date-time/bootstrap-timepicker.min.js","../../static/js/date-time/moment.min.js","../../static/js/date-time/daterangepicker.min.js","../../static/js/date-time/bootstrap-datetimepicker.min.js","../../static/js/bootstrap-colorpicker.min.js","../../static/js/jquery.knob.min.js","../../static/js/jquery.autosize.min.js","../../static/js/jquery.inputlimiter.1.3.1.min.js","../../static/js/jquery.maskedinput.min.js","../../static/js/bootstrap-tag.min.js","../../static/js/typeahead.jquery.min.js", null]
 	ace.load_ajax_scripts(scripts, function() {
 	  //inline scripts related to this page
@@ -89,7 +86,8 @@
 			 else $('#form-field-select-4').removeClass('tag-input-style');
 		});
 	
-	
+	     
+		
 		$('[data-rel=tooltip]').tooltip({container:'body'});
 		$('[data-rel=popover]').popover({container:'body'});
 		
@@ -134,8 +132,7 @@
 	
 	
 		
-		//"jQuery UI Slider"
-		//range slider tooltip example
+	
 		$( "#slider-range" ).css('height','200px').slider({
 			orientation: "vertical",
 			range: true,
@@ -457,7 +454,7 @@
 				$('.multiselect').multiselect({
 				 enableFiltering: true,
 				 buttonClass: 'btn btn-white btn-primary',
-		 
+				 
 				 templates: {
 					button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown"></button>',
 					ul: '<ul class="multiselect-container dropdown-menu"></ul>',
@@ -467,10 +464,10 @@
 					divider: '<li class="multiselect-item divider"></li>',
 					liGroup: '<li class="multiselect-item group"><label class="multiselect-group"></label></li>'
 				 }
-				  
+
 				});
-				
-				
+                
+				 
 				///////////////////
 					
 				//typeahead.js
@@ -522,6 +519,9 @@
 				});
 			
 	});
+ 
+
+
 </script>
 
         <link rel="stylesheet" href="../../static/css/ace.onpage-help.css" />

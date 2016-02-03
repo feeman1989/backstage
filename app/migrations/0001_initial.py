@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Machine_Info',
             fields=[
-                ('id', models.IntegerField(auto_created=True, max_length=50, primary_key=True, serialize=False)),
+                ('id', models.IntegerField(auto_created=True, primary_key=True, serialize=False)),
                 ('name', models.CharField(max_length=100, unique=True)),
                 ('zone', models.CharField(max_length=100)),
                 ('tenworldid', models.CharField(max_length=100)),

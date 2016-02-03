@@ -4,6 +4,7 @@ from models import Machine_Info
 from django.contrib.auth.decorators import login_required
 from django.template.loader import get_template
 from django.template import Context
+from app.untils.exec_command import exe
 import json
 # Create your views here.
 def login(request):
@@ -47,9 +48,8 @@ def exec_sys_command(request):
         server_infos = Machine_Info.objects.order_by('-id')
         return render_to_response("exec_sys_command.html",{'server_infos':server_infos})
     elif request.method == "POST":
-        print request.POST
         sys_command = request.POST.get('sys_command')
-        ip_add = request.POST.get('food')
+        ip_add = request.POST.getlist('servers')
         print ip_add
         return HttpResponseRedirect("/index/")
 
