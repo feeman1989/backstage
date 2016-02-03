@@ -4,9 +4,11 @@ from models import Machine_Info
 from django.contrib.auth.decorators import login_required
 from django.template.loader import get_template
 from django.template import Context
-
+import multiprocessing,os
 import json
 # Create your views here.
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 def login(request):
     if request.user is not None:
         logout(request)
@@ -41,7 +43,9 @@ def alter_open_server_time(request):
     if request.method == "GET":
         server_infos = Machine_Info.objects.order_by('-id')
         return render_to_response("alter_open_server_time.html",{'server_infos':server_infos})
-
+def run(host,command):
+    task = """%s/app/untils/exec_command.py -a %s -e %s""" % (BASE_DIR,host,command)
+    return task
 @login_required
 def exec_sys_command(request):
     if request.method == "GET":
@@ -49,8 +53,13 @@ def exec_sys_command(request):
         return render_to_response("exec_sys_command.html",{'server_infos':server_infos})
     elif request.method == "POST":
         sys_command = request.POST.get('sys_command')
-        ip_add = request.POST.getlist('servers')
-        return HttpResponseRedirect("/index/")
+        ip_list = request.POST.getlist('servers')
+        ip_list = map(lambda x:x.split()[1],ip_list)
+        results = []
+        for host in ip_list:
+            result = run(host,sys_command)
+            results.append(result)
+        return render_to_response("result.html",{'result':results})
 
 @login_required
 def open_server(request):
