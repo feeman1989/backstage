@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import paramiko
-def cmd_command(address,command):
+def alter_open_server(address,command):
     try:
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -11,5 +11,3 @@ def cmd_command(address,command):
         return out
     except:
         print "Command Error!"
-
-

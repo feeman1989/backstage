@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response,HttpResponseRedirect,HttpResponse
 from django.contrib import auth
 from models import Machine_Info
@@ -5,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.template.loader import get_template
 from django.template import Context
 import multiprocessing,os
+from app.untils.exec_command import cmd_command
+from app.untils.alter_openserver_time import alter_open_server
 import json
 # Create your views here.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -43,9 +46,21 @@ def alter_open_server_time(request):
     if request.method == "GET":
         server_infos = Machine_Info.objects.order_by('-id')
         return render_to_response("alter_open_server_time.html",{'server_infos':server_infos})
-def run(host,command):
-    task = """%s/app/untils/exec_command.py -a %s -e %s""" % (BASE_DIR,host,command)
-    return task
+    elif request.method == "POST":
+        server_time = request.POST.get("server_time").split("-")
+        server_time.reverse()
+        server_time = "-".join(server_time)
+        ip_list = request.POST.getlist("servers")
+        ip_list = map(lambda x:x.split()[1],ip_list)
+        alter_time = """sed -i "s/server_born_time =.*/server_born_time = %s 10:00/" server_bin/ws/ws.cfg""" % server_time.strip()
+        hosts = []
+        results = []
+        for host in ip_list:
+            result = alter_open_server(host,alter_time)
+            results.append(result)
+            hosts.append(host)
+        return render_to_response("result.html",{'result':results[0],'hosts':hosts})
+
 @login_required
 def exec_sys_command(request):
     if request.method == "GET":
@@ -56,10 +71,12 @@ def exec_sys_command(request):
         ip_list = request.POST.getlist('servers')
         ip_list = map(lambda x:x.split()[1],ip_list)
         results = []
+        hosts = []
         for host in ip_list:
-            result = run(host,sys_command)
+            result = cmd_command(host,sys_command)
             results.append(result)
-        return render_to_response("result.html",{'result':results})
+            hosts.append(host)
+        return render_to_response("result.html",{'result':results[0],'hosts':hosts})
 
 @login_required
 def open_server(request):

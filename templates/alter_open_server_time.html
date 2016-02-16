@@ -5,12 +5,12 @@
 <div class="row">
 	<div class="col-xs-12">
 		<!-- PAGE CONTENT BEGINS -->
-		<form class="form-horizontal" role="form">
+		<form class="form-horizontal" role="form" method="POST" action="/alter_open_server_time/">
 		    <div class="form-group">
 				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="food">选择服务器：</label>
 					<div class="col-xs-12 col-sm-9">
 					<!-- #section:plugins/input.multiselect -->
-						<select id="food" class="multiselect" multiple="">
+						<select id="food" class="multiselect" multiple="multiple" name="servers">
 						{% for host in server_infos %}
 							<option value="{{host.zone}} {{host.interip}}">{{host.zone}} {{host.interip}}</option>
 						{% endfor %}
@@ -25,7 +25,7 @@
 
 				<div class="col-sm-2">
 					<div class="input-group">
-						<input class="form-control date-picker" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy" />
+						<input class="form-control date-picker" name="server_time" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy" />
 							<span class="input-group-addon">
 								<i class="fa fa-calendar bigger-110"></i>
 							</span>
@@ -38,7 +38,7 @@
 	 
 			<div class="clearfix form-actions">
 				<div class="col-md-offset-3 col-md-9">
-					<button class="btn btn-info" type="button">
+					<button class="btn btn-info" type="submit">
 						<i class="ace-icon fa fa-check bigger-110"></i>
 						执行
 					</button>
