@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/backstage.iml" filepath="$PROJECT_DIR$/.idea/backstage.iml" />
+      <module fileurl="file://F:/pypr/.idea/pypr.iml" filepath="F:/pypr/.idea/pypr.iml" />
+      <module fileurl="file://F:/pyui/.idea/pyui.iml" filepath="F:/pyui/.idea/pyui.iml" />
       <module fileurl="file://E:/yunwei_backstage_v3/.idea/yunwei_backstage_v3.iml" filepath="E:/yunwei_backstage_v3/.idea/yunwei_backstage_v3.iml" />
     </modules>
   </component>

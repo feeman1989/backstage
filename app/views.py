@@ -53,11 +53,13 @@ def alter_open_server_time(request):
         ip_list = request.POST.getlist("servers")
         ip_list = map(lambda x:x.split()[1],ip_list)
         alter_time = """sed -i "s/server_born_time =.*/server_born_time = %s 10:00/" server_bin/ws/ws.cfg""" % server_time.strip()
+        restart = """cd server_bin;sh start.sh"""
         hosts = []
         results = []
         for host in ip_list:
-            result = alter_open_server(host,alter_time)
-            results.append(result)
+            alter_open_server(host,alter_time)
+            result2 = alter_open_server(host,restart)
+            results.append(result2)
             hosts.append(host)
         return render_to_response("result.html",{'result':results[0],'hosts':hosts})
 
