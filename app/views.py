@@ -10,7 +10,6 @@ from app.untils.exec_command import cmd_command
 from app.untils.alter_openserver_time import alter_open_server
 import json
 # Create your views here.
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def login(request):
     if request.user is not None:
@@ -61,7 +60,7 @@ def alter_open_server_time(request):
             result2 = alter_open_server(host,restart)
             results.append(result2)
             hosts.append(host)
-        return render_to_response("result.html",{'result':results[0],'hosts':hosts})
+        return render_to_response("inbox.html")
 
 @login_required
 def exec_sys_command(request):
@@ -74,11 +73,13 @@ def exec_sys_command(request):
         ip_list = map(lambda x:x.split()[1],ip_list)
         results = []
         hosts = []
+
         for host in ip_list:
             result = cmd_command(host,sys_command)
             results.append(result)
             hosts.append(host)
-        return render_to_response("result.html",{'result':results[0],'hosts':hosts})
+        adict = dict(zip(hosts,results))
+        return render_to_response("inbox.html",{"results":adict})
 
 @login_required
 def open_server(request):

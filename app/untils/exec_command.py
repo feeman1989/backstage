@@ -10,6 +10,6 @@ def cmd_command(address,command):
         ssh.close()
         return out
     except:
-        print "Command Error!"
+        return "Command Error!"
 
 
