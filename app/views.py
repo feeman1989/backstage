@@ -35,6 +35,7 @@ def index(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect("/login/")
+
 @login_required
 def machine_info(request):
     if request.method == "GET":
@@ -73,7 +74,6 @@ def exec_sys_command(request):
         ip_list = map(lambda x:x.split()[1],ip_list)
         results = []
         hosts = []
-
         for host in ip_list:
             result = cmd_command(host,sys_command)
             results.append(result)
@@ -86,3 +86,10 @@ def open_server(request):
     if request.method == "GET":
         server_infos = Machine_Info.objects.order_by('-id')
         return render_to_response("open_server.html",{'server_infos':server_infos})
+
+@login_required
+def upload_file(request):
+    if request.method == "GET":
+        server_infos = Machine_Info.objects.order_by('-id')
+        return render_to_response("uploadfile.html")
+
