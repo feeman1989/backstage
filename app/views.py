@@ -5,10 +5,9 @@ from models import Machine_Info
 from django.contrib.auth.decorators import login_required
 from django.template.loader import get_template
 from django.template import Context
-import multiprocessing,os
 from app.untils.exec_command import cmd_command
 from app.untils.alter_openserver_time import alter_open_server
-import json
+
 # Create your views here.
 
 def login(request):
@@ -91,5 +90,9 @@ def open_server(request):
 def upload_file(request):
     if request.method == "GET":
         server_infos = Machine_Info.objects.order_by('-id')
-        return render_to_response("uploadfile.html")
+        return render_to_response("uploadfile.html",{"server_infos":server_infos})
+    elif request.method == "POST":
+        filename = request.FILES.get("uploadfile")
+        return render_to_response("inbox.html")
+
 
