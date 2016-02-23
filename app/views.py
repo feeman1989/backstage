@@ -93,6 +93,11 @@ def upload_file(request):
         return render_to_response("uploadfile.html",{"server_infos":server_infos})
     elif request.method == "POST":
         filename = request.FILES.get("uploadfile")
+        f = open("upload/%s"%filename,"w")
+        for i in filename.chunks():
+            f.write(i)
+        f.close()
         return render_to_response("inbox.html")
+
 
 

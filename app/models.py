@@ -11,3 +11,7 @@ class Machine_Info(models.Model):
     tenworldid = models.CharField(max_length=100)
     localip = models.CharField(max_length=120)
     interip = models.CharField(max_length=120)
+
+class UploadFile(models.Model):
+    __tablename__ = "uploadfile"
+    file = models.FileField()
