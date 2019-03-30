@@ -97,6 +97,7 @@ def upload_file(request):
         for i in filename.chunks():
             f.write(i)
         f.close()
+		print 'test app page'
         return render_to_response("inbox.html")
 
 
